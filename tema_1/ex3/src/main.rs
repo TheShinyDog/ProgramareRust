@@ -8,7 +8,7 @@ fn main() {
         }
         if i == 1 {
             println!(
-                "{i} bottles of beer on the wall,\n{i} bottles of beer.\nTake one down, pass it around,\nNo bottles of beer on the wall.\n"
+                "{i} bottle of beer on the wall,\n{i} bottles of beer.\nTake one down, pass it around,\nNo bottles of beer on the wall.\n"
             );
         }
     }
