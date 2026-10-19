@@ -19,12 +19,10 @@ fn count_char(s: &str, c: char) -> usize {
 // The first word of `s` (up to the first space, or all of `s`), as a slice of `s`.
 // No copying: return a &str that points into `s`. Use as_bytes and a while loop.
 fn first_word(s: &str) -> &str {
-    let mut index = 0;
-    for ch in s.chars() {
+    for (index, ch) in s.chars().enumerate() {
         if ch == ' ' {
             return &s[..index];
         }
-        index += 1;
     }
     s
 }
@@ -40,10 +38,7 @@ fn reverse(s: &str) -> String {
 
 // True if `s` reads the same backwards. Reuse reverse().
 fn is_palindrome(s: &str) -> bool {
-    if reverse(s) == s {
-        return true;
-    }
-    false
+    reverse(s) == s
 }
 
 // A new String made of `s` repeated n times.
@@ -98,11 +93,10 @@ fn longer_of(a: String, b: String) -> String {
 
 // Build a Note from two string slices. The Note must own its text.
 fn make_note(title: &str, body: &str) -> Note {
-    let note1 = Note {
+    Note {
         title: String::from(title),
         body: String::from(body),
-    };
-    note1
+    }
 }
 
 // Number of words in the body, counted by hand with chars().
@@ -113,7 +107,7 @@ fn word_count(note: &Note) -> usize {
             count += 1;
         }
     }
-    if note.body.chars().last() == Some(' ') {
+    if note.body.ends_with(' ') {
         count -= 1;
     }
     count += 1;
@@ -141,8 +135,8 @@ fn archive(note: Note) -> String {
 // Title becomes "<a>+<b>", body becomes "<a body> <b body>".
 fn merge(a: Note, b: &Note) -> Note {
     let mut merged = Note {
-        title: String::from(a.title),
-        body: String::from(a.body),
+        title: a.title,
+        body: a.body,
     };
     merged.title.push('+');
     merged.title.push_str(&b.title);
